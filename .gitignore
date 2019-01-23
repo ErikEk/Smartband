@@ -2,3 +2,5 @@
 *.log
 heartrate_*.*
 temp*
+*.csv
+*.png

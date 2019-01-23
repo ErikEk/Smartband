@@ -7,11 +7,14 @@ from constants import ALERT_TYPES
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--standard',  action='store_true',help='Shows device information')
+parser.add_argument('-hm', '--heart',  action='store_true',help='Shows result from a heart measurmnet')
 parser.add_argument('-r', '--recorded',  action='store_true',help='Shows previews recorded data')
 parser.add_argument('-l', '--live',  action='store_true',help='Measures live heart rate')
 parser.add_argument('-i', '--init',  action='store_true',help='Initializes the device')
 parser.add_argument('-m', '--mac', required=True, help='Mac address of the device')
 args = parser.parse_args()
+
+
 
 MAC = args.mac # sys.argv[1]
 
@@ -39,10 +42,12 @@ if args.standard:
     print 'Message notif'
     band.send_alert(ALERT_TYPES.MESSAGE)
     time.sleep(3)
+    
     # this will vibrate till not off
     print 'Phone notif'
     band.send_alert(ALERT_TYPES.PHONE)
     time.sleep(8)
+    
     print 'OFF'
     band.send_alert(ALERT_TYPES.NONE)
     print 'Soft revision:',band.get_revision()
@@ -54,6 +59,9 @@ if args.standard:
     print 'Heart rate oneshot:', band.get_heart_rate_one_time()
 
 
+if args.heart:
+    print 'Heart rate oneshot:', band.get_heart_rate_one_time()
+ 
 def l(x):
     print 'Realtime heart:', x
 

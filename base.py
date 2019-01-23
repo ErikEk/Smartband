@@ -419,10 +419,12 @@ class MiBand2(Peripheral):
         char_ctrl.write(b'\x15\x01\x01', True)
         t = time.time()
         while True:
+            print("loop")
             self.waitForNotifications(0.5)
             self._parse_queue()
             # send ping request every 12 sec
             if (time.time() - t) >= 12:
+                print("sending ping")
                 char_ctrl.write(b'\x16', True)
                 t = time.time()
 
@@ -474,6 +476,7 @@ class MiBand2(Peripheral):
             self._parse_queue()
             # send ping request every 12 sec
             if (time.time() - t) >= 12:
+                print("sending ping")
                 char_ctrl.write(b'\x16', True)
                 t = time.time()
 
